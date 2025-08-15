@@ -1,0 +1,33 @@
+{
+  "name": "NutriAI - Your AI-Powered Nutrition Coach",
+  "short_name": "NutriAI",
+  "description": "Personalized nutrition planning with AI-powered meal recommendations",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFDE7",
+  "theme_color": "#2E7D32",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["health", "lifestyle", "food"],
+  "screenshots": [
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}
