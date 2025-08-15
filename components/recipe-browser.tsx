@@ -108,7 +108,7 @@ export function RecipeBrowser({ filters }: RecipeBrowserProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-24">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 pb-24">
       {recipes.map((recipe, index) => (
         <RecipeCard key={`${recipe.id}-${index}`} recipe={recipe} />
       ))}
