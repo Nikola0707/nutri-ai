@@ -23,12 +23,12 @@ export default function AuthCallback() {
       if (data.session) {
         // Check if user has completed onboarding
         const { data: profile } = await supabase
-          .from("user_profiles")
-          .select("onboarding_completed")
-          .eq("user_id", data.session.user.id)
+          .from("profiles")
+          .select("id")
+          .eq("id", data.session.user.id)
           .single();
 
-        if (profile?.onboarding_completed) {
+        if (profile) {
           router.push("/dashboard");
         } else {
           router.push("/onboarding");

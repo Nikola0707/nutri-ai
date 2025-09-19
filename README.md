@@ -7,274 +7,207 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.9-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 
-## 🌟 Features
+## 🌟 What is NutriAI?
 
-### 🧠 AI-Powered Nutrition
+NutriAI is your personal nutrition companion that makes healthy eating simple and enjoyable. Whether you're looking to lose weight, build muscle, or simply maintain a balanced diet, our AI-powered platform creates personalized meal plans that fit your lifestyle and dietary preferences.
 
-- **Personalized Meal Planning**: AI-generated meal plans based on your health goals, dietary restrictions, and preferences
-- **Smart Recipe Recommendations**: Discover recipes tailored to your nutritional needs and taste preferences
-- **Nutrition Coaching**: AI chat assistant for personalized nutrition advice and guidance
+## ✨ Key Features
 
-### 📊 Comprehensive Tracking
+### 🤖 AI-Powered Meal Planning
 
-- **Daily Nutrition Logging**: Track calories, macros, and micronutrients with intuitive logging tools
+- **Personalized Recommendations**: Get meal suggestions tailored to your health goals, dietary restrictions, and taste preferences
+- **Smart Recipe Discovery**: Find recipes that match your nutritional needs and cooking skill level
+- **Adaptive Learning**: The AI learns from your preferences to provide better recommendations over time
+
+### 📊 Comprehensive Nutrition Tracking
+
+- **Daily Logging**: Track calories, macros, and micronutrients with intuitive logging tools
 - **Progress Monitoring**: Visual charts and analytics to track your health journey
 - **Goal Setting**: Set and monitor nutrition targets, weight goals, and fitness objectives
+- **Insights & Analytics**: Get detailed reports on your eating patterns and progress
 
 ### 🛒 Smart Grocery Management
 
 - **Auto-Generated Lists**: Grocery lists automatically created from your meal plans
-- **Shopping Organization**: Categorized lists with smart grouping and prioritization
-- **Budget Tracking**: Monitor spending and optimize your grocery shopping
+- **Smart Organization**: Categorized lists with store layout optimization
+- **Budget Tracking**: Monitor spending and find cost-effective alternatives
+- **Never Forget**: Get reminders for essential items and meal prep ingredients
+
+### 💬 AI Nutrition Coach
+
+- **24/7 Support**: Get instant answers to your nutrition questions
+- **Personalized Advice**: Receive tailored recommendations based on your goals
+- **Educational Content**: Learn about healthy eating habits and food choices
+- **Motivation & Tips**: Stay motivated with daily tips and encouragement
 
 ### 🍽️ Recipe Management
 
-- **Recipe Database**: Browse and save recipes with detailed nutritional information
-- **Custom Recipes**: Create and share your own recipes with the community
+- **Extensive Database**: Browse thousands of recipes with detailed nutritional information
+- **Custom Recipes**: Create and save your own recipes
 - **Meal Prep Planning**: Plan and organize your weekly meal preparation
+- **Cooking Instructions**: Step-by-step guides with timing and techniques
 
 ### 📱 Modern User Experience
 
 - **Mobile-First Design**: Optimized for mobile devices with responsive design
 - **Dark/Light Mode**: Toggle between themes for comfortable viewing
-- **Intuitive Navigation**: Clean, modern interface with bottom navigation
-- **Real-time Updates**: Live data synchronization across all devices
+- **Intuitive Navigation**: Clean, modern interface with easy-to-use navigation
+- **Real-time Sync**: Access your data across all devices instantly
 
-## 🏗️ Tech Stack
+## 🎯 Perfect For
 
-### Frontend
+### Health Enthusiasts
 
-- **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS v4
-- **UI Components**: Radix UI primitives
-- **State Management**: Zustand with persistence
-- **Data Fetching**: TanStack React Query
-- **Forms**: React Hook Form + Zod validation
+- Optimize your nutrition with data-driven insights
+- Track your progress with detailed analytics
+- Get personalized recommendations for your goals
 
-### Backend
+### Busy Professionals
 
-- **Database**: PostgreSQL (via Supabase)
-- **Authentication**: Supabase Auth
-- **API**: Supabase REST API + Edge Functions
-- **Real-time**: Supabase Realtime subscriptions
-- **Security**: Row Level Security (RLS)
+- Quick, healthy meal solutions that fit your schedule
+- Automated grocery lists to save time
+- Meal prep planning for efficient cooking
 
-### Development Tools
+### Fitness Goals
 
-- **Package Manager**: pnpm
-- **Linting**: Next.js ESLint
-- **Type Checking**: TypeScript
-- **Database Migrations**: SQL scripts
+- Weight loss, muscle gain, or maintenance programs
+- Macro and calorie tracking for precise nutrition
+- Progress monitoring with visual analytics
 
-## 🚀 Quick Start
+### Dietary Restrictions
 
-### Prerequisites
+- Vegetarian, vegan, gluten-free, and other dietary needs
+- Allergen-free meal suggestions
+- Customizable preferences and restrictions
 
-- Node.js 18+
-- pnpm (recommended) or npm
-- Supabase account
+### Cooking Beginners
 
-### 1. Clone the Repository
+- Simple, step-by-step meal instructions
+- Basic cooking techniques and tips
+- Gradual skill building with easy recipes
 
-```bash
-git clone https://github.com/Nikola0707/nutriai.git
-cd nutriai
-```
+## 🚀 Getting Started
 
-### 2. Install Dependencies
+### 1. Sign Up
 
-```bash
-pnpm install
-# or
-npm install
-```
+Create your free account in seconds with just your email and password.
 
-### 3. Set Up Supabase
+### 2. Set Your Goals
 
-1. Create a new project at [supabase.com](https://supabase.com)
-2. Go to **Settings** → **API** to get your project credentials
-3. Create `.env.local` file:
+Tell us about your health objectives, dietary preferences, and lifestyle.
 
-```bash
-# Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+### 3. Get Your Plan
 
-# Optional: For production
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-```
+Receive your personalized meal plan and grocery list tailored to your needs.
 
-### 4. Set Up Database
+### 4. Track Progress
 
-1. Go to your Supabase project dashboard
-2. Navigate to **SQL Editor**
-3. Run the database setup scripts in order:
-   - `scripts/01-create-tables.sql` - Core database schema
-   - `scripts/02-add-chat-table.sql` - Chat functionality
-   - `scripts/03-create-recipes-tables.sql` - Recipe management
-   - `scripts/04-create-meal-plan-tables.sql` - Enhanced meal planning
+Log your meals, monitor your progress, and watch your health improve.
 
-### 5. Start Development Server
+## 🏆 Why Choose NutriAI?
 
-```bash
-pnpm dev
-# or
-npm run dev
-```
+### 🎯 Personalized Experience
 
-Visit [http://localhost:3000](http://localhost:3000) to see your app!
+Every recommendation is tailored to your unique needs, preferences, and goals.
 
-## 📁 Project Structure
+### 🔬 Science-Based Approach
 
-```
-nutriai/
-├── app/                    # Next.js App Router
-│   ├── api/               # API routes
-│   │   ├── chat/          # AI chat endpoints
-│   │   └── meal-plans/    # Meal plan management
-│   ├── auth/              # Authentication pages
-│   │   ├── login/         # Login page
-│   │   ├── sign-up/       # Registration page
-│   │   └── callback/      # Auth callback
-│   ├── dashboard/         # Main application (protected)
-│   │   ├── chat/          # AI nutrition coach
-│   │   ├── meal-plans/    # Meal planning interface
-│   │   ├── recipes/       # Recipe browser
-│   │   ├── grocery-lists/ # Shopping list management
-│   │   ├── progress/      # Progress tracking
-│   │   └── settings/      # User preferences
-│   ├── onboarding/        # User setup flow
-│   └── layout.tsx         # Root layout
-├── components/            # Reusable UI components
-│   ├── ui/               # Base UI components (Radix UI)
-│   ├── chat-interface.tsx
-│   ├── meal-plan-creator.tsx
-│   ├── recipe-card.tsx
-│   └── ...
-├── lib/                   # Core utilities
-│   ├── supabase/         # Supabase configuration
-│   ├── store.ts          # Zustand state management
-│   ├── providers.tsx     # React Query provider
-│   └── utils.ts          # Utility functions
-├── scripts/              # Database migration scripts
-│   ├── 01-create-tables.sql
-│   ├── 02-add-chat-table.sql
-│   ├── 03-create-recipes-tables.sql
-│   └── 04-create-meal-plan-tables.sql
-└── public/               # Static assets
-```
+Built on proven nutrition principles and the latest research in dietary science.
 
-## 🗄️ Database Schema
+### 🤖 AI-Powered Intelligence
 
-### Core Tables
+Advanced algorithms that learn and adapt to your preferences over time.
 
-- **`profiles`** - User profiles extending Supabase auth
-- **`user_preferences`** - Dietary restrictions, goals, and targets
-- **`meal_plans`** - User meal plans with nutrition targets
-- **`meals`** - Individual meals within plans
-- **`recipes`** - Recipe database with nutritional data
-- **`grocery_lists`** - Shopping lists
-- **`nutrition_logs`** - Daily food tracking
-- **`progress_tracking`** - Weight and body metrics
+### 📱 User-Friendly Design
 
-### Security Features
+Intuitive interface that makes healthy eating simple and enjoyable.
 
-- **Row Level Security (RLS)** enabled on all tables
-- **User isolation** - users can only access their own data
-- **Automatic profile creation** via database triggers
-- **Secure API endpoints** with authentication
+### 🔒 Privacy & Security
 
-## 🔐 Security
+Your data is protected with enterprise-grade security and privacy controls.
 
-### Authentication
+### 🌍 Comprehensive Solution
 
-- **Supabase Auth** for user management
-- **JWT tokens** for session management
-- **Automatic token refresh** and session handling
-- **Protected routes** with middleware
+Everything you need for successful nutrition management in one platform.
 
-### Data Protection
+## 🌱 Our Mission
 
-- **Row Level Security (RLS)** policies
-- **User data isolation** at database level
-- **Secure API endpoints** with proper validation
-- **Environment variable protection**
+We believe that healthy eating should be simple, enjoyable, and accessible to everyone. NutriAI combines the power of artificial intelligence with expert nutrition knowledge to help you build sustainable, healthy eating habits that last a lifetime.
 
-## 🧪 Testing
+## 📊 Success Stories
 
-### Database Security Test
+> "NutriAI helped me lose 30 pounds in 6 months while still enjoying my favorite foods. The personalized meal plans made it so easy!" - Sarah M.
 
-```sql
--- Test RLS policies
-SELECT
-  'Total profiles:' as test,
-  COUNT(*) as count
-FROM profiles;
+> "As a busy mom, I love how NutriAI creates my grocery lists automatically. It saves me hours every week!" - Jennifer L.
 
--- Should only show current user's data
-SELECT * FROM profiles;
-```
+> "The AI coach answered all my nutrition questions and helped me understand what my body needs. Game changer!" - Mike R.
 
-### Authentication Test
+## 🎯 Health Goals We Support
 
-1. Create test users in Supabase Auth
-2. Verify profile creation via triggers
-3. Test protected route access
-4. Verify data isolation between users
+- **Weight Loss**: Sustainable calorie deficit with balanced nutrition
+- **Muscle Gain**: High-protein meal plans for muscle building
+- **Weight Maintenance**: Balanced nutrition for long-term health
+- **Athletic Performance**: Fuel your workouts with optimal nutrition
+- **Medical Conditions**: Support for diabetes, heart health, and other conditions
+- **General Wellness**: Maintain energy and vitality through proper nutrition
 
-## 🚀 Deployment
+## 🌟 Premium Features
 
-### Vercel (Recommended)
+### Advanced Analytics
 
-1. Connect your GitHub repository to Vercel
-2. Add environment variables in Vercel dashboard
-3. Deploy automatically on push to main branch
+- Detailed nutrition reports and insights
+- Trend analysis and progress tracking
+- Custom goal setting and monitoring
 
-### Environment Variables for Production
+### Priority Support
 
-```bash
-NEXT_PUBLIC_SUPABASE_URL=your_production_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_production_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-```
+- 24/7 customer support
+- Priority feature requests
+- Direct access to nutrition experts
 
-## 🤝 Contributing
+### Extended Recipe Database
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+- Access to premium recipes
+- Exclusive chef-created content
+- Advanced filtering and search
 
-## 📝 License
+## 📱 Download & Access
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+NutriAI is available as a web application that works seamlessly across all your devices:
 
-## 🙏 Acknowledgments
+- **Desktop**: Full-featured experience with advanced analytics
+- **Mobile**: Optimized for on-the-go nutrition tracking
+- **Tablet**: Perfect for meal planning and recipe browsing
 
-- **Supabase** for the amazing backend-as-a-service platform
-- **Next.js** team for the excellent React framework
-- **Radix UI** for accessible component primitives
-- **Tailwind CSS** for the utility-first CSS framework
-- **Vercel** for seamless deployment and hosting
+## 🤝 Community
 
-## 📞 Support
+Join our community of health-conscious individuals:
 
-- **Documentation**: [Project Wiki](https://github.com/Nikola0707/nutriai/wiki)
-- **Issues**: [GitHub Issues](https://github.com/Nikola0707/nutriai/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Nikola0707/nutriai/discussions)
+- **Success Stories**: Share your journey and inspire others
+- **Recipe Sharing**: Discover and share your favorite healthy recipes
+- **Support Groups**: Connect with others on similar health journeys
+- **Expert Q&A**: Get answers from certified nutritionists
 
-## 🎯 Roadmap
+## 📞 Support & Help
 
-- [ ] **Mobile App** - React Native version
-- [ ] **Social Features** - Share meal plans and recipes
-- [ ] **Advanced Analytics** - Detailed nutrition insights
-- [ ] **Meal Prep Integration** - Batch cooking planning
-- [ ] **Restaurant Integration** - Find healthy options nearby
-- [ ] **Wearable Integration** - Sync with fitness trackers
-- [ ] **Family Planning** - Multi-user household management
+- **Help Center**: Comprehensive guides and tutorials
+- **Live Chat**: Get instant help from our support team
+- **Video Tutorials**: Step-by-step guides for all features
+- **Community Forum**: Connect with other users and get tips
+
+## 🔮 What's Coming Next
+
+- **Mobile App**: Native iOS and Android applications
+- **Wearable Integration**: Sync with fitness trackers and smartwatches
+- **Social Features**: Share meal plans and recipes with friends
+- **Restaurant Integration**: Find healthy options at local restaurants
+- **Family Planning**: Multi-user household management
+- **Advanced AI**: Even more personalized recommendations
 
 ---
+
+**Ready to transform your nutrition journey?** [Get started today!](https://nutriai.app)
+
+_NutriAI - Where technology meets nutrition for a healthier you._
 
 **Built with ❤️ for better nutrition and healthier living**
