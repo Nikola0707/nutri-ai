@@ -206,7 +206,13 @@ Join our community of health-conscious individuals:
 
 ---
 
-**Ready to transform your nutrition journey?** [Get started today!](https://nutriai.app)
+**Ready to transform your nutrition journey?** [Get started today!](https://nutri-ai-chi.vercel.app)
+
+## 🌐 Live Application
+
+**🚀 [Try NutriAI Now](https://nutri-ai-chi.vercel.app)**
+
+Experience the full power of AI-driven nutrition planning with our live application. Sign up for free and start your personalized nutrition journey today!
 
 _NutriAI - Where technology meets nutrition for a healthier you._
 
