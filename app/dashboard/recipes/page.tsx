@@ -23,6 +23,8 @@ export default function RecipesPage() {
     []
   );
 
+  // Pass filters directly - RecipeBrowser now handles deduplication internally
+
   return (
     <div className="flex flex-col h-full">
       {/* Header */}

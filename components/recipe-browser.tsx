@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { RecipeCard } from "./recipe-card";
-import { getRecipes } from "@/lib/actions";
+import { getRecipes } from "@/lib/actions/recipes";
 import { ChefHat } from "lucide-react";
 
 interface Recipe {
@@ -36,8 +36,24 @@ export function RecipeBrowser({ filters }: RecipeBrowserProps) {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const lastFiltersRef = useRef<string>("");
 
   useEffect(() => {
+    // Create a string representation of filters to compare
+    const filtersString = JSON.stringify({
+      search: filters.search || "",
+      cuisine: filters.cuisine,
+      difficulty: filters.difficulty,
+      dietaryTags: filters.dietaryTags.sort(), // Sort to ensure consistent comparison
+    });
+
+    // Only fetch if filters actually changed
+    if (filtersString === lastFiltersRef.current) {
+      return;
+    }
+
+    lastFiltersRef.current = filtersString;
+
     async function fetchRecipes() {
       try {
         setLoading(true);
