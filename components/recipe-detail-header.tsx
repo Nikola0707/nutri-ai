@@ -1,39 +1,39 @@
-"use client"
+"use client";
 
-import { Clock, Users, ChefHat } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+import { Clock, Users, ChefHat } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 interface Recipe {
-  id: string
-  title: string
-  description: string
-  image_url: string | null
-  prep_time: number | null
-  cook_time: number | null
-  total_time: number | null
-  servings: number | null
-  difficulty: string | null
-  cuisine_type: string | null
-  dietary_tags: string[] | null
+  id: string;
+  title: string;
+  description: string;
+  image_url: string | null;
+  prep_time: number | null;
+  cook_time: number | null;
+  total_time: number | null;
+  servings: number | null;
+  difficulty: string | null;
+  cuisine_type: string | null;
+  dietary_tags: string[] | null;
 }
 
 interface RecipeDetailHeaderProps {
-  recipe: Recipe
+  recipe: Recipe;
 }
 
 export function RecipeDetailHeader({ recipe }: RecipeDetailHeaderProps) {
   const getDifficultyColor = (difficulty: string | null) => {
     switch (difficulty) {
       case "easy":
-        return "bg-green-100 text-green-800 border-green-200"
+        return "bg-green-100 text-green-800 border-green-200";
       case "medium":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200"
+        return "bg-yellow-100 text-yellow-800 border-yellow-200";
       case "hard":
-        return "bg-red-100 text-red-800 border-red-200"
+        return "bg-red-100 text-red-800 border-red-200";
       default:
-        return "bg-neutral-100 text-neutral-800 border-neutral-200"
+        return "bg-neutral-100 text-neutral-800 border-neutral-200";
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -57,8 +57,12 @@ export function RecipeDetailHeader({ recipe }: RecipeDetailHeaderProps) {
       {/* Recipe Title and Basic Info */}
       <div className="space-y-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">{recipe.title}</h1>
-          <p className="text-gray-600 text-lg leading-relaxed">{recipe.description}</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            {recipe.title}
+          </h1>
+          <p className="text-gray-600 text-lg leading-relaxed">
+            {recipe.description}
+          </p>
         </div>
 
         {/* Recipe Meta */}
@@ -76,7 +80,9 @@ export function RecipeDetailHeader({ recipe }: RecipeDetailHeaderProps) {
             </div>
           )}
           {recipe.difficulty && (
-            <Badge className={`${getDifficultyColor(recipe.difficulty)} font-medium`}>
+            <Badge
+              className={`${getDifficultyColor(recipe.difficulty)} font-medium`}
+            >
               {recipe.difficulty}
             </Badge>
           )}
@@ -103,5 +109,5 @@ export function RecipeDetailHeader({ recipe }: RecipeDetailHeaderProps) {
         )}
       </div>
     </div>
-  )
+  );
 }

@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   Menu,
   LayoutDashboard,
@@ -23,30 +23,30 @@ import {
   LogOut,
   MessageCircle,
   User,
-} from "lucide-react"
-import { signOut } from "@/lib/actions"
-import { cn } from "@/lib/utils"
+} from "lucide-react";
+import { signOut } from "@/lib/actions/auth";
+import { cn, getUserInitials } from "@/lib/utils";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Meal Plans", href: "/dashboard/meal-plans", icon: Utensils },
-  { name: "Grocery Lists", href: "/dashboard/grocery-lists", icon: ShoppingCart },
+  {
+    name: "Grocery Lists",
+    href: "/dashboard/grocery-lists",
+    icon: ShoppingCart,
+  },
   { name: "Progress", href: "/dashboard/progress", icon: TrendingUp },
   { name: "AI Chat", href: "/dashboard/chat", icon: MessageCircle },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
-]
+];
 
 interface MobileNavProps {
-  user: any
+  user: any;
 }
 
 export default function MobileNav({ user }: MobileNavProps) {
-  const [open, setOpen] = useState(false)
-  const pathname = usePathname()
-
-  const getUserInitials = (email: string) => {
-    return email.substring(0, 2).toUpperCase()
-  }
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <div className="lg:hidden">
@@ -67,14 +67,16 @@ export default function MobileNav({ user }: MobileNavProps) {
                     <div className="bg-emerald-100 p-2 rounded-lg">
                       <Utensils className="h-6 w-6 text-emerald-600" />
                     </div>
-                    <span className="text-xl font-bold text-gray-900">NutriAI</span>
+                    <span className="text-xl font-bold text-gray-900">
+                      NutriAI
+                    </span>
                   </div>
                 </div>
 
                 {/* Navigation */}
                 <nav className="flex-1 px-4 py-6 space-y-2">
                   {navigation.map((item) => {
-                    const isActive = pathname === item.href
+                    const isActive = pathname === item.href;
                     return (
                       <Link
                         key={item.name}
@@ -84,13 +86,13 @@ export default function MobileNav({ user }: MobileNavProps) {
                           "flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors",
                           isActive
                             ? "bg-emerald-100 text-emerald-700"
-                            : "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
+                            : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                         )}
                       >
                         <item.icon className="mr-3 h-5 w-5" />
                         {item.name}
                       </Link>
-                    )
+                    );
                   })}
                 </nav>
               </div>
@@ -110,7 +112,9 @@ export default function MobileNav({ user }: MobileNavProps) {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="sm" className="p-1">
               <Avatar className="h-8 w-8">
-                <AvatarImage src={user.user_metadata?.avatar_url || "/placeholder.svg"} />
+                <AvatarImage
+                  src={user.user_metadata?.avatar_url || "/placeholder.svg"}
+                />
                 <AvatarFallback className="bg-emerald-100 text-emerald-700">
                   {getUserInitials(user.email)}
                 </AvatarFallback>
@@ -119,7 +123,9 @@ export default function MobileNav({ user }: MobileNavProps) {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
             <div className="px-2 py-1.5">
-              <p className="text-sm font-medium text-gray-900">{user.user_metadata?.full_name || "User"}</p>
+              <p className="text-sm font-medium text-gray-900">
+                {user.user_metadata?.full_name || "User"}
+              </p>
               <p className="text-xs text-gray-500">{user.email}</p>
             </div>
             <DropdownMenuSeparator />
@@ -148,5 +154,5 @@ export default function MobileNav({ user }: MobileNavProps) {
         </DropdownMenu>
       </div>
     </div>
-  )
+  );
 }

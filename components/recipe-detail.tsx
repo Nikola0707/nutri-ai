@@ -1,67 +1,67 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ArrowLeft } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { RecipeDetailHeader } from "./recipe-detail-header"
-import { RecipeDetailNutrition } from "./recipe-detail-nutrition"
-import { RecipeDetailIngredients } from "./recipe-detail-ingredients"
-import { RecipeDetailInstructions } from "./recipe-detail-instructions"
-import { RecipeDetailActions } from "./recipe-detail-actions"
+import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { RecipeDetailHeader } from "./recipe-detail-header";
+import { RecipeDetailNutrition } from "./recipe-detail-nutrition";
+import { RecipeDetailIngredients } from "./recipe-detail-ingredients";
+import { RecipeDetailInstructions } from "./recipe-detail-instructions";
+import { RecipeDetailActions } from "./recipe-detail-actions";
 
 interface Recipe {
-  id: string
-  title: string
-  description: string
-  image_url: string | null
-  prep_time: number | null
-  cook_time: number | null
-  total_time: number | null
-  servings: number | null
-  difficulty: string | null
-  cuisine_type: string | null
-  dietary_tags: string[] | null
-  calories_per_serving: number | null
-  protein_per_serving: number | null
-  carbs_per_serving: number | null
-  fat_per_serving: number | null
-  fiber_per_serving: number | null
-  sugar_per_serving: number | null
-  sodium_per_serving: number | null
+  id: string;
+  title: string;
+  description: string;
+  image_url: string | null;
+  prep_time: number | null;
+  cook_time: number | null;
+  total_time: number | null;
+  servings: number | null;
+  difficulty: string | null;
+  cuisine_type: string | null;
+  dietary_tags: string[] | null;
+  calories_per_serving: number | null;
+  protein_per_serving: number | null;
+  carbs_per_serving: number | null;
+  fat_per_serving: number | null;
+  fiber_per_serving: number | null;
+  sugar_per_serving: number | null;
+  sodium_per_serving: number | null;
   ingredients: Array<{
-    id: string
-    ingredient_name: string
-    amount: number | null
-    unit: string | null
-    notes: string | null
-    order_index: number
-  }>
+    id: string;
+    ingredient_name: string;
+    amount: number | null;
+    unit: string | null;
+    notes: string | null;
+    order_index: number;
+  }>;
   instructions: Array<{
-    id: string
-    step_number: number
-    instruction: string
-    time_minutes: number | null
-    temperature: number | null
-    image_url: string | null
-  }>
-  average_rating: number
-  total_ratings: number
+    id: string;
+    step_number: number;
+    instruction: string;
+    time_minutes: number | null;
+    temperature: number | null;
+    image_url: string | null;
+  }>;
+  average_rating: number;
+  total_ratings: number;
 }
 
 interface RecipeDetailProps {
-  recipe: Recipe
+  recipe: Recipe;
 }
 
 export function RecipeDetail({ recipe }: RecipeDetailProps) {
-  const router = useRouter()
-  const [servings, setServings] = useState(recipe.servings || 1)
+  const router = useRouter();
+  const [servings, setServings] = useState(recipe.servings || 1);
 
   const handleServingsChange = (newServings: number) => {
     if (newServings > 0) {
-      setServings(newServings)
+      setServings(newServings);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -80,20 +80,15 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             <RecipeDetailHeader recipe={recipe} />
-            
-            <RecipeDetailNutrition 
-              recipe={recipe} 
-              servings={servings} 
+
+            <RecipeDetailNutrition recipe={recipe} servings={servings} />
+
+            <RecipeDetailIngredients
+              ingredients={recipe.ingredients}
+              servings={servings}
             />
-            
-            <RecipeDetailIngredients 
-              ingredients={recipe.ingredients} 
-              servings={servings} 
-            />
-            
-            <RecipeDetailInstructions 
-              instructions={recipe.instructions} 
-            />
+
+            <RecipeDetailInstructions instructions={recipe.instructions} />
           </div>
 
           {/* Sidebar */}
@@ -133,5 +128,5 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { RecipeCard } from "./recipe-card";
 import { getRecipes } from "@/lib/actions/recipes";
-import { ChefHat } from "lucide-react";
+import { ChefHat, ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Recipe {
   id: string;
@@ -36,7 +37,11 @@ export function RecipeBrowser({ filters }: RecipeBrowserProps) {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const lastFiltersRef = useRef<string>("");
+
+  const RECIPES_PER_PAGE = 12;
 
   useEffect(() => {
     // Create a string representation of filters to compare
@@ -53,6 +58,7 @@ export function RecipeBrowser({ filters }: RecipeBrowserProps) {
     }
 
     lastFiltersRef.current = filtersString;
+    setCurrentPage(1); // Reset to first page when filters change
 
     async function fetchRecipes() {
       try {
@@ -72,6 +78,7 @@ export function RecipeBrowser({ filters }: RecipeBrowserProps) {
         const result = await getRecipes(apiFilters);
         if (result.success) {
           setRecipes(result.recipes);
+          setTotalPages(Math.ceil(result.recipes.length / RECIPES_PER_PAGE));
         } else {
           setError(result.error || "Failed to load recipes");
         }
@@ -84,6 +91,17 @@ export function RecipeBrowser({ filters }: RecipeBrowserProps) {
 
     fetchRecipes();
   }, [filters]);
+
+  // Calculate paginated recipes
+  const startIndex = (currentPage - 1) * RECIPES_PER_PAGE;
+  const endIndex = startIndex + RECIPES_PER_PAGE;
+  const paginatedRecipes = recipes.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Scroll to top of recipes section
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   if (loading) {
     return (
@@ -124,10 +142,93 @@ export function RecipeBrowser({ filters }: RecipeBrowserProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 pb-24">
-      {recipes.map((recipe, index) => (
-        <RecipeCard key={`${recipe.id}-${index}`} recipe={recipe} />
-      ))}
+    <div className="space-y-6">
+      {/* Recipes Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {paginatedRecipes.map((recipe, index) => (
+          <RecipeCard key={`${recipe.id}-${index}`} recipe={recipe} />
+        ))}
+      </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center space-x-2 mt-8">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="flex items-center gap-1"
+          >
+            <ChevronLeft size={16} />
+            Previous
+          </Button>
+
+          <div className="flex items-center space-x-1">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+              // Show first page, last page, current page, and pages around current
+              const shouldShow =
+                page === 1 ||
+                page === totalPages ||
+                (page >= currentPage - 1 && page <= currentPage + 1);
+
+              if (!shouldShow) {
+                // Show ellipsis for gaps
+                if (page === 2 && currentPage > 4) {
+                  return (
+                    <span
+                      key={`ellipsis-${page}`}
+                      className="px-2 text-gray-500"
+                    >
+                      ...
+                    </span>
+                  );
+                }
+                if (page === totalPages - 1 && currentPage < totalPages - 3) {
+                  return (
+                    <span
+                      key={`ellipsis-${page}`}
+                      className="px-2 text-gray-500"
+                    >
+                      ...
+                    </span>
+                  );
+                }
+                return null;
+              }
+
+              return (
+                <Button
+                  key={page}
+                  variant={currentPage === page ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => handlePageChange(page)}
+                  className="w-10 h-10 p-0"
+                >
+                  {page}
+                </Button>
+              );
+            })}
+          </div>
+
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="flex items-center gap-1"
+          >
+            Next
+            <ChevronRight size={16} />
+          </Button>
+        </div>
+      )}
+
+      {/* Results info */}
+      <div className="text-center text-sm text-gray-500 mt-4">
+        Showing {startIndex + 1}-{Math.min(endIndex, recipes.length)} of{" "}
+        {recipes.length} recipes
+      </div>
     </div>
   );
 }

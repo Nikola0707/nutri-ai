@@ -1,41 +1,43 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Check } from "lucide-react"
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Check } from "lucide-react";
 
 interface Instruction {
-  id: string
-  step_number: number
-  instruction: string
-  time_minutes: number | null
-  temperature: number | null
-  image_url: string | null
+  id: string;
+  step_number: number;
+  instruction: string;
+  time_minutes: number | null;
+  temperature: number | null;
+  image_url: string | null;
 }
 
 interface RecipeDetailInstructionsProps {
-  instructions: Instruction[]
+  instructions: Instruction[];
 }
 
-export function RecipeDetailInstructions({ instructions }: RecipeDetailInstructionsProps) {
-  const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set())
+export function RecipeDetailInstructions({
+  instructions,
+}: RecipeDetailInstructionsProps) {
+  const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
 
   const toggleStepCompletion = (stepNumber: number) => {
-    setCompletedSteps(prev => {
-      const newSet = new Set(prev)
+    setCompletedSteps((prev) => {
+      const newSet = new Set(prev);
       if (newSet.has(stepNumber)) {
-        newSet.delete(stepNumber)
+        newSet.delete(stepNumber);
       } else {
-        newSet.add(stepNumber)
+        newSet.add(stepNumber);
       }
-      return newSet
-    })
-  }
+      return newSet;
+    });
+  };
 
-  const completedCount = completedSteps.size
-  const totalSteps = instructions.length
-  const progress = totalSteps > 0 ? (completedCount / totalSteps) * 100 : 0
+  const completedCount = completedSteps.size;
+  const totalSteps = instructions.length;
+  const progress = totalSteps > 0 ? (completedCount / totalSteps) * 100 : 0;
 
   return (
     <Card>
@@ -54,30 +56,32 @@ export function RecipeDetailInstructions({ instructions }: RecipeDetailInstructi
           {instructions
             .sort((a, b) => a.step_number - b.step_number)
             .map((instruction) => {
-              const isCompleted = completedSteps.has(instruction.step_number)
-              
+              const isCompleted = completedSteps.has(instruction.step_number);
+
               return (
                 <div
                   key={instruction.id}
                   className={`flex items-start space-x-3 p-4 rounded-lg border ${
-                    isCompleted 
-                      ? "bg-green-50 border-green-200" 
+                    isCompleted
+                      ? "bg-green-50 border-green-200"
                       : "bg-gray-50 border-gray-200"
                   }`}
                 >
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => toggleStepCompletion(instruction.step_number)}
+                    onClick={() =>
+                      toggleStepCompletion(instruction.step_number)
+                    }
                     className={`p-1 h-8 w-8 rounded-full ${
-                      isCompleted 
-                        ? "bg-green-100 text-green-600 hover:bg-green-200" 
+                      isCompleted
+                        ? "bg-green-100 text-green-600 hover:bg-green-200"
                         : "bg-white text-gray-400 hover:bg-gray-100"
                     }`}
                   >
                     <Check size={16} />
                   </Button>
-                  
+
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-sm font-medium text-gray-600">
@@ -94,9 +98,11 @@ export function RecipeDetailInstructions({ instructions }: RecipeDetailInstructi
                         </span>
                       )}
                     </div>
-                    <p className={`text-gray-700 ${
-                      isCompleted ? "line-through opacity-60" : ""
-                    }`}>
+                    <p
+                      className={`text-gray-700 ${
+                        isCompleted ? "line-through opacity-60" : ""
+                      }`}
+                    >
                       {instruction.instruction}
                     </p>
                     {instruction.image_url && (
@@ -108,10 +114,10 @@ export function RecipeDetailInstructions({ instructions }: RecipeDetailInstructi
                     )}
                   </div>
                 </div>
-              )
+              );
             })}
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

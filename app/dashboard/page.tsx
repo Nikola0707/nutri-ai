@@ -51,10 +51,10 @@ export default async function DashboardPage() {
   // Get today's nutrition log
   const today = new Date().toISOString().split("T")[0];
   const { data: todayNutrition } = await supabase
-    .from("nutrition_logs")
+    .from("progress_tracking")
     .select("*")
     .eq("user_id", user?.id)
-    .eq("log_date", today);
+    .eq("date", today);
 
   // Calculate today's totals
   const todayTotals = todayNutrition?.reduce(

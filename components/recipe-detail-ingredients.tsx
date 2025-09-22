@@ -1,46 +1,49 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface Ingredient {
-  id: string
-  ingredient_name: string
-  amount: number | null
-  unit: string | null
-  notes: string | null
-  order_index: number
+  id: string;
+  ingredient_name: string;
+  amount: number | null;
+  unit: string | null;
+  notes: string | null;
+  order_index: number;
 }
 
 interface RecipeDetailIngredientsProps {
-  ingredients: Ingredient[]
-  servings: number
+  ingredients: Ingredient[];
+  servings: number;
 }
 
-export function RecipeDetailIngredients({ ingredients, servings }: RecipeDetailIngredientsProps) {
+export function RecipeDetailIngredients({
+  ingredients,
+  servings,
+}: RecipeDetailIngredientsProps) {
   const getAdjustedAmount = (originalAmount: number | null) => {
-    if (!originalAmount) return null
-    return Math.round(originalAmount * servings * 100) / 100
-  }
+    if (!originalAmount) return null;
+    return Math.round(originalAmount * servings * 100) / 100;
+  };
 
   const formatIngredient = (ingredient: Ingredient) => {
-    const amount = getAdjustedAmount(ingredient.amount)
-    const unit = ingredient.unit || ""
-    const name = ingredient.ingredient_name
-    const notes = ingredient.notes
+    const amount = getAdjustedAmount(ingredient.amount);
+    const unit = ingredient.unit || "";
+    const name = ingredient.ingredient_name;
+    const notes = ingredient.notes;
 
-    let formatted = ""
+    let formatted = "";
     if (amount) {
-      formatted += `${amount} ${unit}`.trim()
+      formatted += `${amount} ${unit}`.trim();
     }
     if (name) {
-      formatted += ` ${name}`.trim()
+      formatted += ` ${name}`.trim();
     }
     if (notes) {
-      formatted += ` (${notes})`
+      formatted += ` (${notes})`;
     }
 
-    return formatted.trim()
-  }
+    return formatted.trim();
+  };
 
   return (
     <Card>
@@ -67,5 +70,5 @@ export function RecipeDetailIngredients({ ingredients, servings }: RecipeDetailI
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

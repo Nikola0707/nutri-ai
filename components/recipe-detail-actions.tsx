@@ -1,58 +1,60 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Heart, Star, Plus } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { toggleRecipeFavorite, rateRecipe } from "@/lib/actions"
-import { toast } from "sonner"
-import { AddToMealPlanDialog } from "./add-to-meal-plan-dialog"
+import { useState } from "react";
+import { Heart, Star, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { toggleRecipeFavorite, rateRecipe } from "@/lib/actions/recipes";
+import { toast } from "sonner";
+import { AddToMealPlanDialog } from "./add-to-meal-plan-dialog";
 
 interface RecipeDetailActionsProps {
-  recipeId: string
-  recipeTitle: string
-  averageRating: number
-  totalRatings: number
+  recipeId: string;
+  recipeTitle: string;
+  averageRating: number;
+  totalRatings: number;
 }
 
-export function RecipeDetailActions({ 
-  recipeId, 
-  recipeTitle, 
-  averageRating, 
-  totalRatings 
+export function RecipeDetailActions({
+  recipeId,
+  recipeTitle,
+  averageRating,
+  totalRatings,
 }: RecipeDetailActionsProps) {
-  const [isFavorited, setIsFavorited] = useState(false)
-  const [userRating, setUserRating] = useState(0)
-  const [showAddToMealPlan, setShowAddToMealPlan] = useState(false)
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [userRating, setUserRating] = useState(0);
+  const [showAddToMealPlan, setShowAddToMealPlan] = useState(false);
 
   const handleFavoriteToggle = async () => {
     try {
-      const result = await toggleRecipeFavorite(recipeId)
+      const result = await toggleRecipeFavorite(recipeId);
       if (result.success) {
-        setIsFavorited(result.isFavorited)
-        toast.success(result.isFavorited ? "Added to favorites" : "Removed from favorites")
+        setIsFavorited(result.isFavorited ?? false);
+        toast.success(
+          result.isFavorited ? "Added to favorites" : "Removed from favorites"
+        );
       } else {
-        toast.error(result.error || "Failed to update favorite")
+        toast.error(result.error || "Failed to update favorite");
       }
     } catch (error) {
-      toast.error("Failed to update favorite")
+      toast.error("Failed to update favorite");
     }
-  }
+  };
 
   const handleRating = async (rating: number) => {
     try {
-      const result = await rateRecipe(recipeId, rating)
+      const result = await rateRecipe(recipeId, rating);
       if (result.success) {
-        setUserRating(rating)
-        toast.success("Rating submitted")
+        setUserRating(rating);
+        toast.success("Rating submitted");
       } else {
-        toast.error(result.error || "Failed to submit rating")
+        toast.error(result.error || "Failed to submit rating");
       }
     } catch (error) {
-      toast.error("Failed to submit rating")
+      toast.error("Failed to submit rating");
     }
-  }
+  };
 
   return (
     <Card>
@@ -65,14 +67,14 @@ export function RecipeDetailActions({
           variant="outline"
           onClick={handleFavoriteToggle}
           className={`w-full ${
-            isFavorited 
-              ? "bg-red-50 border-red-200 text-red-600 hover:bg-red-100" 
+            isFavorited
+              ? "bg-red-50 border-red-200 text-red-600 hover:bg-red-100"
               : "hover:bg-gray-50"
           }`}
         >
-          <Heart 
-            size={20} 
-            className={`mr-2 ${isFavorited ? "fill-current" : ""}`} 
+          <Heart
+            size={20}
+            className={`mr-2 ${isFavorited ? "fill-current" : ""}`}
           />
           {isFavorited ? "Remove from Favorites" : "Add to Favorites"}
         </Button>
@@ -98,14 +100,14 @@ export function RecipeDetailActions({
                 size="sm"
                 onClick={() => handleRating(rating)}
                 className={`p-1 h-8 w-8 ${
-                  userRating >= rating 
-                    ? "text-yellow-400" 
+                  userRating >= rating
+                    ? "text-yellow-400"
                     : "text-gray-300 hover:text-yellow-400"
                 }`}
               >
-                <Star 
-                  size={16} 
-                  className={userRating >= rating ? "fill-current" : ""} 
+                <Star
+                  size={16}
+                  className={userRating >= rating ? "fill-current" : ""}
                 />
               </Button>
             ))}
@@ -126,12 +128,13 @@ export function RecipeDetailActions({
         {/* Add to Meal Plan Dialog */}
         {showAddToMealPlan && (
           <AddToMealPlanDialog
-            recipeId={recipeId}
-            recipeTitle={recipeTitle}
-            onClose={() => setShowAddToMealPlan(false)}
+            recipe={{ id: recipeId, title: recipeTitle, servings: null }}
+            open={showAddToMealPlan}
+            onOpenChange={setShowAddToMealPlan}
+            servings={1}
           />
         )}
       </CardContent>
     </Card>
-  )
+  );
 }
